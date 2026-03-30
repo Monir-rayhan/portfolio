@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moniruzzaman Rayhan — Civil & BIM Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f4f0e8;
+    --rust: #c44b1e;
+    --steel: #2c4a6e;
+    --muted: #7a7060;
+    --light: #e8e2d4;
+    --accent: #e8a02a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(244,240,232,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--light);
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rust); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 4rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-tag::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--rust); }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name span { color: var(--rust); }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 440px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+    width: fit-content;
+  }
+  .hero-cta:hover { background: var(--rust); transform: translateX(4px); }
+  .hero-cta svg { transition: transform 0.2s; }
+  .hero-cta:hover svg { transform: translateX(4px); }
+
+  .hero-right {
+    background: var(--steel);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Blueprint grid on hero right */
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 3rem;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 320px;
+  }
+
+  .stat-box {
+    background: rgba(255,255,255,0.06);
+    padding: 2rem 1.5rem;
+    text-align: left;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s;
+  }
+  .stat-box:hover { background: rgba(255,255,255,0.1); }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 7rem 4rem; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  /* ─── ABOUT ─── */
+  .about { background: var(--ink); color: var(--paper); }
+  .about .section-title { color: var(--paper); }
+  .about .section-num { color: var(--accent); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(244,240,232,0.75);
+    margin-bottom: 1.5rem;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(244,240,232,0.15);
+    color: rgba(244,240,232,0.6);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .expertise-list { list-style: none; }
+  .expertise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(244,240,232,0.08);
+  }
+  .expertise-name { font-size: 0.95rem; color: rgba(244,240,232,0.85); }
+  .expertise-bar {
+    width: 120px;
+    height: 2px;
+    background: rgba(244,240,232,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .expertise-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--accent);
+    transition: width 1s ease;
+  }
+
+  /* ─── EXPERIENCE ─── */
+  .experience { background: var(--paper); }
+
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--light);
+  }
+
+  .timeline-item {
+    padding-left: 3rem;
+    padding-bottom: 4rem;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .timeline-item.visible { opacity: 1; transform: none; }
+
+  .timeline-dot {
+    position: absolute;
+    left: -5px; top: 0.35rem;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--rust);
+    border: 2px solid var(--paper);
+  }
+
+  .timeline-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-company {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .timeline-company span {
+    width: 1px;
+    height: 12px;
+    background: var(--light);
+    display: inline-block;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 680px;
+  }
+
+  .timeline-bullets {
+    list-style: none;
+    margin-top: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  .timeline-bullets li {
+    font-size: 0.83rem;
+    color: var(--muted);
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .timeline-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--rust);
+    font-size: 0.75rem;
+  }
+
+  /* ─── EDUCATION ─── */
+  .education { background: var(--steel); color: var(--paper); }
+  .education .section-title { color: var(--paper); }
+  .education .section-num { color: var(--accent); }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .edu-card {
+    background: var(--steel);
+    padding: 2.5rem 2rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .edu-card:hover { background: rgba(255,255,255,0.05); }
+  .edu-card:hover::before { transform: scaleX(1); }
+
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .edu-institution {
+    font-size: 0.82rem;
+    color: rgba(244,240,232,0.5);
+    margin-bottom: 1rem;
+  }
+
+  .edu-result {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(244,240,232,0.35);
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── TRAINING ─── */
+  .training { background: var(--paper); }
+
+  .training-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--light);
+  }
+
+  .training-card {
+    background: var(--paper);
+    padding: 3rem;
+  }
+
+  .training-icon {
+    width: 48px; height: 48px;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .training-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; }
+
+  .training-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .training-org {
+    font-size: 0.8rem;
+    color: var(--rust);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+  }
+
+  .training-modules {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .module-tag {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--light);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── CONTACT / FOOTER ─── */
+  .contact {
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 50vh;
+    padding: 0;
+    gap: 0;
+  }
+
+  .contact-left {
+    padding: 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid rgba(244,240,232,0.08);
+  }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .contact-title em { color: var(--accent); font-style: normal; }
+
+  .contact-text {
+    font-size: 1rem;
+    color: rgba(244,240,232,0.55);
+    max-width: 400px;
+    line-height: 1.7;
+  }
+
+  .contact-right {
+    padding: 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(244,240,232,0.08);
+  }
+
+  .contact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .contact-value {
+    font-size: 1rem;
+    color: rgba(244,240,232,0.8);
+  }
+
+  .footer-bar {
+    background: #050505;
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bar p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: rgba(244,240,232,0.2);
+    text-transform: uppercase;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.7s ease forwards;
+    opacity: 0;
+  }
+  .hero-tag { animation-delay: 0.2s; }
+  .hero-name { animation-delay: 0.35s; }
+  .hero-subtitle { animation-delay: 0.5s; }
+  .hero-cta { animation-delay: 0.65s; }
+
+  .stat-box {
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+  .stat-box:nth-child(1) { animation-delay: 0.4s; }
+  .stat-box:nth-child(2) { animation-delay: 0.5s; }
+  .stat-box:nth-child(3) { animation-delay: 0.6s; }
+  .stat-box:nth-child(4) { animation-delay: 0.7s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    section { padding: 5rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 300px; }
+    .hero-left { padding: 8rem 1.5rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .timeline-bullets { grid-template-columns: 1fr; }
+    .training-grid { grid-template-columns: 1fr; }
+    .contact { grid-template-columns: 1fr; }
+    .contact-left, .contact-right { padding: 4rem 1.5rem; }
+    .footer-bar { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .section-header { flex-direction: column; gap: 0.5rem; }
+    .hero-stats { width: 100%; grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">MR / Portfolio</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Civil &amp; BIM Engineer — Dhaka, Bangladesh</p>
+    <h1 class="hero-name">Moniruzzaman<br><span>Rayhan</span></h1>
+    <p class="hero-subtitle">Building Bangladesh's metro rail infrastructure — leading steel structure works, BIM coordination, and project management for large-scale transport projects.</p>
+    <a href="#experience" class="hero-cta">
+      View Experience
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="0" y1="8" x2="12" y2="8"/><polyline points="8,4 12,8 8,12"/></svg>
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="stat-num">11+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">53+</div>
+          <div class="stat-label">Depot Buildings</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Rail Stations</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Companies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-header">
+    <span class="section-num">01 /</span>
+    <h2 class="section-title">Profile</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Civil Engineer with extensive experience in project management, steel and RC structure detailing, design, fabrication, and project execution across large-scale metro rail projects, bridges, depots, hangars, commercial and industrial facilities.</p>
+      <p>Skilled in infrastructure design using Civil 3D (road design, corridor modeling, grading, survey data integration, parcels mapping) and ArcGIS mapping. Proven ability to coordinate between consultancy, fabrication, and construction teams, ensuring compliance with international codes (AWS, EN, AISC, BNBC).</p>
+      <div class="skills-grid">
+        <span class="skill-tag">Tekla Structures</span>
+        <span class="skill-tag">Revit</span>
+        <span class="skill-tag">Civil 3D</span>
+        <span class="skill-tag">Navisworks</span>
+        <span class="skill-tag">Synchro Pro 4D</span>
+        <span class="skill-tag">AutoCAD</span>
+        <span class="skill-tag">Bluebeam</span>
+        <span class="skill-tag">ArcGIS</span>
+        <span class="skill-tag">MS Project</span>
+        <span class="skill-tag">Dynamo</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">R</span>
+      </div>
+    </div>
+    <div>
+      <ul class="expertise-list" id="expertise-bars">
+        <li class="expertise-item"><span class="expertise-name">Steel Structure Execution</span><div class="expertise-bar"><div class="expertise-fill" data-width="95"></div></div></li>
+        <li class="expertise-item"><span class="expertise-name">3D Modeling & Detailing</span><div class="expertise-bar"><div class="expertise-fill" data-width="92"></div></div></li>
+        <li class="expertise-item"><span class="expertise-name">BIM Coordination</span><div class="expertise-bar"><div class="expertise-fill" data-width="90"></div></div></li>
+        <li class="expertise-item"><span class="expertise-name">Project Management</span><div class="expertise-bar"><div class="expertise-fill" data-width="88"></div></div></li>
+        <li class="expertise-item"><span class="expertise-name">Civil 3D / GIS</span><div class="expertise-bar"><div class="expertise-fill" data-width="80"></div></div></li>
+        <li class="expertise-item"><span class="expertise-name">Fabrication & QC</span><div class="expertise-bar"><div class="expertise-fill" data-width="88"></div></div></li>
+        <li class="expertise-item"><span class="expertise-name">Site Supervision</span><div class="expertise-bar"><div class="expertise-fill" data-width="93"></div></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-header">
+    <span class="section-num">02 /</span>
+    <h2 class="section-title">Work Experience</h2>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-period">June 2022 — Present</p>
+      <h3 class="timeline-role">Assistant Manager, BIM &amp; Project Management</h3>
+      <p class="timeline-company">Italian Thai Development Company Ltd <span></span> Dhaka, Bangladesh</p>
+      <p class="timeline-desc">Led steel structure works for Dhaka Metro Rail main stations, entry/exit structures, and pedestrian skywalks, ensuring compliance with structural design specifications, welding codes (AWS/EN), and fabrication standards.</p>
+      <ul class="timeline-bullets">
+        <li>Supervised multidisciplinary teams of site engineers, surveyors, and erection crews</li>
+        <li>Directed steel detailing operations, reviewing shop drawings for international standards</li>
+        <li>Conducted factory inspections with QC and QS teams</li>
+        <li>Coordinated project scheduling using MS Project</li>
+        <li>Developed method statements, erection procedures &amp; safety protocols</li>
+        <li>Managed document control including RFIs and as-built drawings</li>
+        <li>Maintained 100% on-time inspection clearance rate</li>
+        <li>Reduced fabrication non-conformance through early shop drawing reviews</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-period">Jan 2020 — May 2022</p>
+      <h3 class="timeline-role">Senior Detailing Engineer</h3>
+      <p class="timeline-company">McDonald Steel Building Products Ltd. <span></span> Bangladesh</p>
+      <p class="timeline-desc">Modeled complete steel structures using Tekla Structures, including connections, joints, trusses, and complex geometry. Generated NC files and cutting plans for CNC machines.</p>
+      <ul class="timeline-bullets">
+        <li>Reviewed shop drawings for AISC, AWS, BS/EN code compliance</li>
+        <li>Developed erection sequence drawings for large structures</li>
+        <li>Generated NC files and cutting plans for CNC machines</li>
+        <li>Established welding methods for complex structural profiles</li>
+        <li>Managed a detailing team of engineers and draftsmen</li>
+        <li>Coordinated with design, fabrication &amp; erection teams</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-period">Jan 2018 — Dec 2019</p>
+      <h3 class="timeline-role">CAD Operator</h3>
+      <p class="timeline-company">ACE Consultants Ltd. <span></span> Dhaka, Bangladesh</p>
+      <p class="timeline-desc">Managed the CAD and detailing team for railway infrastructure facilities. Produced detailed designs for depot structural buildings and railway steel bridges.</p>
+      <ul class="timeline-bullets">
+        <li>Led preparation of 53 major depot buildings &amp; 15 railway stations</li>
+        <li>Produced designs for Wagon &amp; Carriage Maintenance Buildings</li>
+        <li>Coordinated with structural engineers, architects &amp; PMs</li>
+        <li>Implemented drawing standards and layer management</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p class="timeline-period">March 2015 — Dec 2017</p>
+      <h3 class="timeline-role">Site Engineer</h3>
+      <p class="timeline-company">Acier Building Technology <span></span> Dhaka, Bangladesh</p>
+      <p class="timeline-desc">Prepared, scheduled, coordinated, and monitored construction activities to ensure timely and cost-effective delivery. Supervised on-site construction works and maintained quality control.</p>
+      <ul class="timeline-bullets">
+        <li>Monitored budget, schedule, plans &amp; workforce performance</li>
+        <li>Reviewed engineering deliverables &amp; initiated corrective actions</li>
+        <li>Client liaison for daily requirement interpretation</li>
+        <li>Supervised execution per design and standards</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <div class="section-header">
+    <span class="section-num">03 /</span>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <p class="edu-year">2025 — Appeared</p>
+      <h3 class="edu-degree">M.Sc. GIS for Environment &amp; Development</h3>
+      <p class="edu-institution">Jahangirnagar University</p>
+      <p class="edu-result">MSGED</p>
+    </div>
+    <div class="edu-card">
+      <p class="edu-year">2023</p>
+      <h3 class="edu-degree">B.Sc. in Civil Engineering</h3>
+      <p class="edu-institution">World University of Bangladesh</p>
+      <p class="edu-result">CGPA: 3.23 / 4.00</p>
+    </div>
+    <div class="edu-card">
+      <p class="edu-year">2014</p>
+      <h3 class="edu-degree">Diploma in Civil Engineering</h3>
+      <p class="edu-institution">Bogura Polytechnic Institute</p>
+      <p class="edu-result">CGPA: 2.89 / 4.00</p>
+    </div>
+    <div class="edu-card">
+      <p class="edu-year">2010</p>
+      <h3 class="edu-degree">Secondary School Certificate (SSC)</h3>
+      <p class="edu-institution">Chapadaha B.L. High School</p>
+      <p class="edu-result">Result: 4.94 / 5.00 — Science</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section class="training" id="training">
+  <div class="section-header">
+    <span class="section-num">04 /</span>
+    <h2 class="section-title">Training &amp; Certifications</h2>
+  </div>
+  <div class="training-grid">
+    <div class="training-card">
+      <div class="training-icon">
+        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <h3 class="training-name">Tekla Structures for Civil Engineers</h3>
+      <p class="training-org">Engineering Staff College of Bangladesh</p>
+      <ul class="training-modules">
+        <li class="module-tag">Steel Structures Overview</li>
+        <li class="module-tag">Tekla Introduction</li>
+        <li class="module-tag">Basic Modelling</li>
+        <li class="module-tag">Grids &amp; Steel Parts</li>
+        <li class="module-tag">Bolts &amp; Welds</li>
+        <li class="module-tag">Connections</li>
+        <li class="module-tag">Assembly Details</li>
+        <li class="module-tag">Pre-Engineered Building</li>
+        <li class="module-tag">Numbering &amp; Detailing</li>
+        <li class="module-tag">Reporting</li>
+      </ul>
+    </div>
+    <div class="training-card">
+      <div class="training-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      </div>
+      <h3 class="training-name">Diploma in Architecture &amp; Civil CAD</h3>
+      <p class="training-org">IsDB-BISEW (IDB-BISEW)</p>
+      <ul class="training-modules">
+        <li class="module-tag">AutoCAD Design &amp; Drafting</li>
+        <li class="module-tag">3DS Max 3D Modelling</li>
+        <li class="module-tag">Revit Architecture</li>
+        <li class="module-tag">Adobe Photoshop</li>
+        <li class="module-tag">MS Project Management</li>
+        <li class="module-tag">Portfolio Development</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <h2 class="contact-title">Let's work<br><em>together.</em></h2>
+    <p class="contact-text">Open to new opportunities in civil engineering, BIM management, and infrastructure projects. Feel free to reach out via the contact details provided.</p>
+  </div>
+  <div class="contact-right">
+    <div class="contact-item">
+      <span class="contact-label">Location</span>
+      <span class="contact-value">Dhaka, Bangladesh</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Nationality</span>
+      <span class="contact-value">Bangladeshi</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Reference — McDonald Steel</span>
+      <span class="contact-value">Engr. KM Ariful Islam — kmariful@mcdonaldbd.net</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Reference — Acier Building</span>
+      <span class="contact-value">Engr. Md. Anowarul Kabir — acierbuildingtechnology@gmail.com</span>
+    </div>
+  </div>
+</section>
+
+<div class="footer-bar">
+  <p>© 2025 Moniruzzaman Rayhan</p>
+  <p>Civil &amp; BIM Engineer — Bangladesh</p>
+</div>
+
+<script>
+  // Intersection observer for timeline items
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+
+  // Animate expertise bars on scroll
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.expertise-fill').forEach(fill => {
+          fill.style.width = fill.dataset.width + '%';
+        });
+        barObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const expertiseSection = document.getElementById('expertise-bars');
+  if (expertiseSection) barObserver.observe(expertiseSection);
+</script>
+
+</body>
+</html>
